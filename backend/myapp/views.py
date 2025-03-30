@@ -7,7 +7,7 @@ from .serializers import TodoSerializer
 # Fetch all tasks
 @api_view(['GET'])
 def task_list(request):
-    tasks = Todo.objects.all()
+    tasks = Todo.objects.all().order_by("-id")
     serializer = TodoSerializer(tasks, many=True)
     return Response(serializer.data)
 
