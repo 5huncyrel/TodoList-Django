@@ -26,7 +26,7 @@ jobs:
       run: |
         python manage.py migrate --noinput
 
-    - name: Collect Static Files  # ✅ This is the new step
+    - name: Collect Static Files 
       run: |
         python manage.py collectstatic --noinput
         
