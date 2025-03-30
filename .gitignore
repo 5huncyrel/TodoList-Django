@@ -1,0 +1,24 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Virtual Environments (conda, venv)
+.env
+.venv
+env/
+venv/
+conda/
+
+# Django
+db.sqlite3
+*.log
+*.pot
+
+# React (Frontend)
+node_modules/
+build/
+
+# System files
+.DS_Store
