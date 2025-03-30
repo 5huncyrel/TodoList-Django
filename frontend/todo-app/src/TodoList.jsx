@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+
 // Replace with your Django backend API URL
-const API_URL = "http://127.0.0.1:8000/api/todos/";
+const API_URL = import.meta.env.VITE_API_URL; 
 
 export default function TodoList() {
   const [tasks, setTasks] = useState([]);
@@ -17,9 +18,16 @@ export default function TodoList() {
 
   // Fetch all tasks from the Django REST API
   const fetchTasks = async () => {
-    const response = await fetch("http://127.0.0.1:8000/api/todos/fetch/");
-    const data = await response.json();
-    setTasks(data);
+    try {
+      const response = await fetch(`${API_URL}/api/todos/fetch/`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch tasks");
+      }
+      const data = await response.json();
+      setTasks(data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
   };
 
   // Add a new task to the backend
@@ -30,7 +38,7 @@ export default function TodoList() {
         completed: false,
       };
 
-      const response = await fetch("http://127.0.0.1:8000/api/todos/create/", {
+      const response = await fetch(`${API_URL}/api/todos/create/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,8 +47,8 @@ export default function TodoList() {
       });
 
       if (response.ok) {
-        fetchTasks(); // Reload tasks after adding
-        setEditText(""); // Clear the input field
+        fetchTasks(); 
+        setEditText(""); 
       }
     }
   };
@@ -52,7 +60,7 @@ export default function TodoList() {
       completed: tasks.find((task) => task.id === id).completed,
     };
 
-    const response = await fetch(`http://127.0.0.1:8000/api/todos/${id}/update/`, {
+    const response = await fetch(`${API_URL}/api/todos/${id}/update/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -61,9 +69,9 @@ export default function TodoList() {
     });
 
     if (response.ok) {
-      fetchTasks(); // Reload tasks after update
-      setEditingId(null); // Stop editing
-      setEditText(""); // Clear the edit text field
+      fetchTasks(); 
+      setEditingId(null); 
+      setEditText(""); 
     }
   };
 
@@ -72,7 +80,7 @@ export default function TodoList() {
     const taskToUpdate = tasks.find((task) => task.id === id);
     const updatedTask = { ...taskToUpdate, completed: !taskToUpdate.completed };
 
-    const response = await fetch(`http://127.0.0.1:8000/api/todos/${id}/update/`, {
+    const response = await fetch(`${API_URL}/api/todos/${id}/update/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -81,20 +89,22 @@ export default function TodoList() {
     });
 
     if (response.ok) {
-      fetchTasks(); // Reload tasks after completion toggle
+      fetchTasks();
     }
   };
 
   // Delete a task from the backend
   const deleteTask = async (id) => {
-    const response = await fetch(`http://127.0.0.1:8000/api/todos/${id}/delete/`, {
+    const response = await fetch(`${API_URL}/api/todos/${id}/delete/`, {
       method: "DELETE",
     });
 
     if (response.ok) {
-      fetchTasks(); // Reload tasks after deletion
+      fetchTasks(); 
     }
   };
+
+
 
   const filteredTasks = tasks.filter((task) => {
     if (filter === "completed") return task.completed;
