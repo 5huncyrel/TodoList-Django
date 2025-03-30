@@ -59,7 +59,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "https://to-do-list-b7b17.web.app",
+]
 
 
 ROOT_URLCONF = 'myproject.urls'
