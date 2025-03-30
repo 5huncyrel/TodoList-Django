@@ -25,6 +25,10 @@ jobs:
     - name: Run Migrations
       run: |
         python manage.py migrate --noinput
+
+    - name: Collect Static Files  # ✅ This is the new step
+      run: |
+        python manage.py collectstatic --noinput
         
     - name: Deploy to Render
       run: |
