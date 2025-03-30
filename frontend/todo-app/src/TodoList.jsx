@@ -17,7 +17,7 @@ export default function TodoList() {
   // Fetch all tasks from the Django REST API
   const fetchTasks = async () => {
     try {
-      const response = await fetch(`https://todolist-django-cc6r.onrender.com/api/todos/fetch/`);
+      const response = await fetch("https://todolist-django-cc6r.onrender.com/api/todos/fetch/");
       if (!response.ok) {
         throw new Error("Failed to fetch tasks");
       }
@@ -36,7 +36,7 @@ export default function TodoList() {
         completed: false,
       };
 
-      const response = await fetch(`https://todolist-django-cc6r.onrender.com/api/todos/create/`, {
+      const response = await fetch("https://todolist-django-cc6r.onrender.com/api/todos/create/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -118,6 +118,8 @@ export default function TodoList() {
         <input
           type="text"
           placeholder="Add new task..."
+          value={editText} // Bind it to the editText state
+          onChange={(e) => setEditText(e.target.value)} // Update state as user types
         />
         <button className="add-btn" onClick={addTask}>
           ➕ Add Task
