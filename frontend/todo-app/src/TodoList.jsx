@@ -8,6 +8,7 @@ export default function TodoList() {
   const [darkMode, setDarkMode] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
+  const [editingText, setEditingText] = useState(""); 
 
   // Fetch tasks from the backend on component mount
   useEffect(() => {
@@ -54,10 +55,10 @@ export default function TodoList() {
   // Update a task on the backend
   const updateTask = async (id) => {
     const updatedTask = {
-      title: editText,
+      title: editingText,
       completed: tasks.find((task) => task.id === id).completed,
     };
-
+  
     const response = await fetch(`https://todolist-django-cc6r.onrender.com/api/todos/${id}/update/`, {
       method: "PUT",
       headers: {
@@ -65,13 +66,13 @@ export default function TodoList() {
       },
       body: JSON.stringify(updatedTask),
     });
-
+  
     if (response.ok) {
-      fetchTasks(); 
-      setEditingId(null); 
-      setEditText(""); 
+      fetchTasks();
+      setEditingId(null);
+      setEditingText(""); // Reset only `editingText`, not `editText`
     }
-  };
+  };  
 
   // Toggle the completed status of a task
   const toggleComplete = async (id) => {
@@ -118,8 +119,8 @@ export default function TodoList() {
         <input
           type="text"
           placeholder="Add new task..."
-          value={editText} // Bind it to the editText state
-          onChange={(e) => setEditText(e.target.value)} // Update state as user types
+          value={editText} 
+          onChange={(e) => setEditText(e.target.value)} 
         />
         <button className="add-btn" onClick={addTask}>
           ➕ Add Task
@@ -163,9 +164,9 @@ export default function TodoList() {
               {editingId === task.id ? (
                 <input
                   type="text"
-                  value={editText}
-                  onChange={(e) => setEditText(e.target.value)}
-                  onBlur={() => updateTask(task.id)} // Save on blur
+                  value={editingId === task.id ? editingText : task.title}
+                  onChange={(e) => setEditingText(e.target.value)}
+                  onBlur={() => updateTask(task.id)}
                   autoFocus
                 />
               ) : (
@@ -192,7 +193,7 @@ export default function TodoList() {
                   className="edit-btn"
                   onClick={() => {
                     setEditingId(task.id);
-                    setEditText(task.title); // Start editing
+                    setEditingText(task.title); 
                   }}
                 >
                   ✎ Edit
