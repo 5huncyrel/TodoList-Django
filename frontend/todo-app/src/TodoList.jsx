@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 
-// Replace with your Django backend API URL
-const API_URL = import.meta.env.VITE_API_URL; 
 
 export default function TodoList() {
   const [tasks, setTasks] = useState([]);
@@ -19,7 +17,7 @@ export default function TodoList() {
   // Fetch all tasks from the Django REST API
   const fetchTasks = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/todos/fetch/`);
+      const response = await fetch(`https://todolist-django-cc6r.onrender.com/api/todos/fetch/`);
       if (!response.ok) {
         throw new Error("Failed to fetch tasks");
       }
@@ -38,7 +36,7 @@ export default function TodoList() {
         completed: false,
       };
 
-      const response = await fetch(`${API_URL}/api/todos/create/`, {
+      const response = await fetch(`https://todolist-django-cc6r.onrender.com/api/todos/create/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +58,7 @@ export default function TodoList() {
       completed: tasks.find((task) => task.id === id).completed,
     };
 
-    const response = await fetch(`${API_URL}/api/todos/${id}/update/`, {
+    const response = await fetch(`https://todolist-django-cc6r.onrender.com/api/todos/${id}/update/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +78,7 @@ export default function TodoList() {
     const taskToUpdate = tasks.find((task) => task.id === id);
     const updatedTask = { ...taskToUpdate, completed: !taskToUpdate.completed };
 
-    const response = await fetch(`${API_URL}/api/todos/${id}/update/`, {
+    const response = await fetch(`https://todolist-django-cc6r.onrender.com/api/todos/${id}/update/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +93,7 @@ export default function TodoList() {
 
   // Delete a task from the backend
   const deleteTask = async (id) => {
-    const response = await fetch(`${API_URL}/api/todos/${id}/delete/`, {
+    const response = await fetch(`https://todolist-django-cc6r.onrender.com/api/todos/${id}/delete/`, {
       method: "DELETE",
     });
 
