@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-mmm5n9+y2k7x#5tz5_sp(v*w4le&1z(9%usua*$^b_%0&o!f3!
 DEBUG = True
 
 
-ALLOWED_HOSTS = ["your-render-app.onrender.com"]
+ALLOWED_HOSTS = ["todolist-django-cc6r.onrender.com"]
 
 
 # Application definition
