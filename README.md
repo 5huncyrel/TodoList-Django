@@ -8,7 +8,7 @@
 ## Backend API Endpoints
 
 ### 1. Fetch All Tasks
-- **URL**: todolist-django-cc6r.onrender.com/api/todos/fetch/
+- **URL**: https://todolist-django-cc6r.onrender.com/api/todos/fetch/
 - **Method**: `GET`
 
 ### 2. Fetch a single task by ID
