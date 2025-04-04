@@ -1,8 +1,8 @@
-## Link to the backend (Render)
-- https://todolist-django-cc6r.onrender.com/
-
 ## Link to frontend (Firebase)
 - https://to-do-list-b7b17.web.app/
+
+## Link to the backend (Render)
+- https://todolist-django-cc6r.onrender.com/
 
 
 ## Backend API Endpoints
