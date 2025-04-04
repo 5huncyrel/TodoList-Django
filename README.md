@@ -1,7 +1,7 @@
-## link to the backend (Render)
+## Link to the backend (Render)
 - https://todolist-django-cc6r.onrender.com/
 
-## deployed link to frontend (Firebase)
+## Link to frontend (Firebase)
 - https://to-do-list-b7b17.web.app/
 
 
