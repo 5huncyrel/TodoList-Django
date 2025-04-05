@@ -79,3 +79,12 @@ def task_delete(request, pk):
         task.delete()
         return Response({"message": "Task deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
+
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+
+class MyProtectedView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({"message": "Access granted! You're authenticated."})
