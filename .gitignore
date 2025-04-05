@@ -22,3 +22,5 @@ build/
 
 # System files
 .DS_Store
+
+frontend/todo-app/.firebase/hosting.ZGlzdA.cache
